@@ -37,7 +37,7 @@ if ($Cleanup) {
     Write-Host "`n[*] Executing cleanup commands for demonstrated techniques..." -ForegroundColor Yellow
     foreach ($tech in$Techniques) {
         Write-Host "[-] Cleaning up: $($tech.ID) - $($tech.Name)" -ForegroundColor DarkGray
-        Invoke-AtomicTest $tech.ID -PathToAtomics$AtomicsPath -Cleanup -ErrorAction SilentlyContinue | Out-Null
+        Invoke-AtomicTest $tech.ID -PathToAtomics $AtomicsPath -Cleanup -ErrorAction SilentlyContinue | Out-Null
     }
     Write-Host "[✓] Cleanup phase completed.`n" -ForegroundColor Green
     return
