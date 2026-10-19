@@ -13,7 +13,7 @@ if (-not (Get-Module -Name invoke-atomicredteam)) {
 
 $AtomicsPath = Join-Path $InstallPath "atomics"
 if (-not (Test-Path $AtomicsPath)) {
-    Write-Error "Atomic tests path not found at $AtomicsPath. Please run setup-atomic.ps1 first."
+    Write-Error "Atomic tests path not found at $AtomicsPath. Please ensure atomics are extracted to this folder."
     return
 }
 
@@ -57,11 +57,7 @@ Write-Host "    This generates rapid process lineage and execution telemetry.`n"
 
 foreach ($tech in $Techniques) {
     Write-Host "--> Running $($tech.ID): $($tech.Name)..." -ForegroundColor Yellow
-    
-    # Executes the technique using local atomics
     Invoke-AtomicTest $tech.ID -PathToAtomics $AtomicsPath -ErrorAction Continue
-
-    # Short delay to separate process trees in temporal logs
     Start-Sleep -Seconds 3
 }
 
@@ -72,6 +68,6 @@ Write-Host @"
 Next Steps:
 1. Log in to the ThreatDown Nebula console.
 2. Navigate to 'Analyze' > 'Suspicious Activity'.
-3. Allow up to ~20 minutes for cloud machine-learning models to evaluate process lineage.
+3. Allow up to ~20 minutes for cloud analysis and machine-learning models to evaluate process lineage.
 4. Run '.\run-edr-demo.ps1 -Cleanup' if test artifacts need to be cleared.
 "@ -ForegroundColor Gray
