@@ -33,7 +33,7 @@ Write-Host "==========================================================" -Foregro
 
 if ($Cleanup) {
     Write-Host "`n[*] Executing cleanup commands to remove persistence artifacts..." -ForegroundColor Yellow
-    foreach ($tech in$Techniques) {
+    foreach ($tech in $Techniques) {
         Write-Host "[-] Cleaning up: $($tech.ID) - $($tech.Name)" -ForegroundColor DarkGray
         Invoke-AtomicTest $tech.ID -PathToAtomics$AtomicsPath -Cleanup -ErrorAction SilentlyContinue | Out-Null
     }
@@ -43,7 +43,7 @@ if ($Cleanup) {
 
 if ($CheckPrereqsOnly) {
     Write-Host "`n[*] Verifying dependencies and requirements..." -ForegroundColor Yellow
-    foreach ($tech in$Techniques) {
+    foreach ($tech in $Techniques) {
         Write-Host "`n--- $($tech.ID): $($tech.Name) ---" -ForegroundColor White
         Invoke-AtomicTest $tech.ID -PathToAtomics $AtomicsPath -CheckPrereqs
     }
